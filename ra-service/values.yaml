@@ -10,17 +10,17 @@ global:
 
   services:
     customerInsights:
-      enabled: false
+      enabled: true
       name: customer-insights
       port: 6666
-      version: latest # overriden within deployment process
-      replicas: 1
+      # version: N/A            # mandatory, injected within deployment process
+      replicas: 1               # default, can be overriden
     priceSensitivity:
-      enabled: false
+      enabled: true
       name: price-sensitivity
       port: 7777
-      version: latest # overriden within deployment process
-      replicas: 1
+      # version: N/A            # mandatory, injected deployment process
+      replicas: 1               # default, can be overriden
 
   env:
     DUMMY_ENV_VAR: dummy
