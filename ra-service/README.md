@@ -1,8 +1,15 @@
-[WIP]
+# ABOUT
+Helm (v3) playground :sweat_smile:
 
 # HOW-TO
 
-## UPGRADE --INSTALL
+## REQUIREMENTS
+* Namespace: `demo`
+* Nginx Ingress controller
+* ExternalDNS
+* Linkerd
+
+## HELM UPGRADE options
 `--dry-run` - simulates an install
 
 `--debug` - enables verbose output
@@ -13,45 +20,25 @@
 
 ### DRY-RUN
 ```
-helm upgrade ra-1-0-0 --install \
+helm upgrade ra --install \
   --dry-run --debug \
   --set global.services.customerInsights.enabled=true \
-  --set global.services.customerInsights.version="1.0" \
+  --set global.services.customerInsights.version="2.0" \
+  --set global.services.priceSensitivity.enabled=true \
+  --set global.services.priceSensitivity.version="1.0" \
   --values values.yaml \
   --values values-dev.yaml \
   .
 ```
 
-### UPGRADE Customer Insights
+### DEPLOY
 ```
-helm upgrade ra-1-0-0 --install \
+helm upgrade ra --install \
   --atomic \
   --set global.services.customerInsights.enabled=true \
-  --set global.services.customerInsights.version="1.0" \
-  --values values.yaml \
-  --values values-dev.yaml \
-  .
-```
-
-### UPGRADE Price Sensitivity
-```
-helm upgrade ra-1-0-0 --install \
-  --atomic \
+  --set global.services.customerInsights.version="2.0" \
   --set global.services.priceSensitivity.enabled=true \
-  --set global.services.priceSensitivity.version="2.0" \
-  --values values.yaml \
-  --values values-dev.yaml \
-  .
-```
-
-### UPGRADE All
-```
-helm upgrade ra-1-0-0 --install \
-  --atomic \
-  --set global.services.customerInsights.enabled=true \
-  --set global.services.customerInsights.version="1.0" \
-  --set global.services.priceSensitivity.enabled=true \
-  --set global.services.priceSensitivity.version="2.0" \
+  --set global.services.priceSensitivity.version="1.0" \
   --values values.yaml \
   --values values-dev.yaml \
   .
