@@ -1,0 +1,38 @@
+#
+# RA Service global and shared configuration values
+#
+# GLOBAL -------------------------------------------------------------------------------------------
+global:
+  namespace: demo
+
+  domainName: k8s.sebolabs.net
+  dnsAlias: ra
+
+  services:
+    customerInsights:
+      enabled: false
+      name: customer-insights
+      port: 6666
+      version: latest # overriden within deployment process
+      replicas: 1
+    priceSensitivity:
+      enabled: false
+      name: price-sensitivity
+      port: 7777
+      version: latest # overriden within deployment process
+      replicas: 1
+
+  env:
+    DUMMY_ENV_VAR: dummy
+
+# INGRESS ------------------------------------------------------------------------------------------
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+    nginx.ingress.kubernetes.io/proxy-redirect-from: "http://$host/"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+

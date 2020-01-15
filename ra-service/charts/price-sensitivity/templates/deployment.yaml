@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    {{- include "priceSensitivity.labels" . | nindent 4 }}
+  annotations:
+    checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+spec:
+  replicas: {{ .Values.global.services.priceSensitivity.replicas }}
+  selector:
+    matchLabels:
+      {{- include "priceSensitivity.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "priceSensitivity.selectorLabels" . | nindent 8 }}
+      annotations:
+        linkerd.io/inject: enabled
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.deployment.image.repository }}:{{ .Values.global.services.priceSensitivity.version }}"
+        imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
+        envFrom:
+        - configMapRef:
+            name: {{ .Chart.Name }}
+        ports:
+        - containerPort: {{ .Values.deployment.container.port }}

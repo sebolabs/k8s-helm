@@ -1,0 +1,7 @@
+#
+# PPR Environment specific configuration values
+#
+# GLOBAL -------------------------------------------------------------------------------------------
+global:
+  env:
+    dremioDb: dremio-ppr

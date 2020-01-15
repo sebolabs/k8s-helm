@@ -1,0 +1,19 @@
+#
+# RA Customer Insights microservice configuration values
+#
+# CONFIG MAP ---------------------------------------------------------------------------------------
+configmap:
+  env:
+    greeting: "Hello from the RA Customer Insights!"
+
+# DEPLOYMENT ---------------------------------------------------------------------------------------
+deployment:
+  image:
+    repository: gcr.io/google-samples/hello-app
+    pullPolicy: IfNotPresent
+  container:
+    port: 8080
+
+# SERVICE ------------------------------------------------------------------------------------------
+service:
+  type: ClusterIP

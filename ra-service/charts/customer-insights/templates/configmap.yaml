@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    {{- include "customerInsights.labels" . | nindent 4 }}
+data:
+  HELLO_GREETING: {{ .Values.configmap.env.greeting | quote }}
+  DREMIO_DB: {{ .Values.global.env.dremioDb | quote }}
