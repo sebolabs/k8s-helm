@@ -15,3 +15,6 @@ dependencies:
   - name: customer-insights
     repository: "file://charts/customer-insights"
     condition: global.services.customerInsights.enabled
+  - name: price-sensitivity
+    repository: "file://charts/price-sensitivity"
+    condition: global.services.priceSensitivity.enabled
